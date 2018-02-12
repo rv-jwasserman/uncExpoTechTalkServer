@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const incommingMessages = []
+let incommingMessages = []
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,6 +11,11 @@ router.get('/', function(req, res, next) {
 router.post('/twilio', (req, res, next) => {
   console.log(req.body.Body)
   incommingMessages.push({ text: req.body.Body, time: Date.now() })
+  res.send(200)
+})
+
+router.get('/delete', (req, res) => {
+  incommingMessages = [];
   res.send(200)
 })
 
